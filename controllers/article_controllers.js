@@ -61,11 +61,6 @@ router.post('/articles/:id', function(req, res) {
 
 // scrapes and displays news articles 
 router.get('/', function(req, res) {
-    // gets html body
- 
-
-        // const $ = cheerio.load(response.data); 
-      
     request(newsURL, function(error, response, html) {
     	// loads html into cheerio and saves it to $
         var $ = cheerio.load(html);
@@ -78,7 +73,7 @@ router.get('/', function(req, res) {
             var result = {};
             result.title = $(this).text();
             result.link = $(this).children('a').attr(`href`);
-            result.teaser = $(this).siblings('div.item-description').text();
+            result.summary = $(this).siblings('div.item-description').text();
             result.img = $(this).siblings('a.item-image').children('img.item-image-src').attr('src');
             items.push(new Articles(result));             
         });
