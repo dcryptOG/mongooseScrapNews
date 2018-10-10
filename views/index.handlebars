@@ -63,94 +63,6 @@
     <section class='content'>
         <div class='content' id='content'>
             <div class='pad'></div>
-
-            {{#if articles}}
-
-			{{#each articles}}
-				<div class="article" data_id="{{this.id}}">
-				    <div class="card horizontal">
-				        <div class="card-image">
-				        	<img src="{{this.img}}">
-				     	</div>
-					    <div class="card-stacked">
-							<div class="card-content">
-								<p class="article-title">{{{this.title}}}</p>
-								<p class="source">{{{this.source}}} -- </p>
-								<span class="teaser">{{this.teaser}}</span>
-							</div>
-							<div id="test" class="card-action">
-					    	    <a class="link blue-text text-darken-2" href=https://www.investopedia.com{{this.link}} target="_blank">Read</a>
-					    	    <a data-id="{{this.id}}" class="notes blue-text text-darken-2">Notes</a>
-					    	    <a data-id="{{this.id}}" class="saveArticle blue-text text-darken-2">Save</a>
-					    	    <a data-id="{{this.id}}" class="hideArticle blue-text text-darken-2">Hide</a>
-					    	</div>
-						</div>
-					</div>
-				</div>
-			{{/each}}
-
-		{{else}}
-
-			<p class="text-center"> There are no current articles to display. </p>
-			    
-		{{/if}}
-
-	</div>
-</div>
-
-           <nav class='flex-container'>
-                <a href='#' class='contentTitle'>
-                    Education
-                </a>
-            </nav>
-            <div class='padSm'></div>
-            <div class='flex-container contentSubTitle'>
-                <p>Northwestern</p>
-            </div>
-            <div class="flex-container date">
-                <p>DATE: May 2018 - December 2018</p>
-            </div>
-            <div class="flex-container-left">
-                <p>&#x2705; Full Stack Web Development Program</p>
-            </div>
-
-            <div class='padSm'></div>
-
-            <div class='flex-container contentSubTitle'>
-                <p>MCAT (old format)</p>
-            </div>
-            <div class="flex-container date">
-                <p>DATE: August 2012</p>
-            </div>
-            <div class="flex-container-left">
-                <p id='mCATScore'>&#x2705; Verbal Reasoning: 95th percentile</p>
-            </div>
-            <div class="flex-container-left">
-                <p>&#x2705; MCAT: Medical College Admissions Test.</p>
-            </div>
-            <div class="flex-container-left">
-                <p>&#x2705; One of the most prestigious and difficult standardized exams in existence</p>
-            </div>
-            <div class='flex-container'>
-                <picture id='mCATScoreBox'>
-                    <img src="assets/img/mCATScore.jpg" id='mCATScore' alt="">
-                </picture>
-            </div>
-        </div>
-    </section>
-
-    <section id='footer'>
-        <div class="content"></div>
-        <div class="footPad">
-        </div>
-        <footer class="footer">
-            <nav class='footNav'>
-                <a href='#topScroll' class='footLink'>Back to Top</a>
-                <a href='#' class='footLink'>&copy;</a>
-            </nav>
-        </footer>
-    </section>
-        
         {{#if articles}}
 
 			{{#each articles}}
@@ -184,3 +96,16 @@
 
 	</div>
 </section>
+
+    <section id='footer'>
+        <div class="content"></div>
+        <div class="footPad">
+        </div>
+        <footer class="footer">
+            <nav class='footNav'>
+                <a href='#topScroll' class='footLink'>Back to Top</a>
+                <a href='#' class='footLink'>&copy;</a>
+            </nav>
+        </footer>
+    </section>
+        
