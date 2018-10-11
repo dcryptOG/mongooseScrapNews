@@ -11,6 +11,55 @@ const Notes = require('../models/notes.js');
 const router = express.Router();
 
 const newsURL = 'https://investopedia.com/news';
+
+// scrapes and displays news articles 
+router.get('/', function(req, res) {
+    request(newsURL, function(error, response, html) {
+    	// loads html into cheerio and saves it to $
+        const $ = cheerio.load(html);
+        // holds items objects
+        var items = [];
+
+        $('h3.item-title').each(function(i, element) {
+            var results = {};
+            results.title = $(this).text();
+            results.link = $(this).children('a').attr(`href`);
+            results.summary = $(this).siblings('div.item-description').text();
+            results.img = $(this).siblings('a.item-image').children('img.item-image-src').attr('src');
+            items.push(new Articles(results));
+        });
+        for (var i = 0; i < items.length; i++) {
+            items[i].save(function(err, data) {
+                if (err) {
+                    console.log(err)
+                } else { console.log(data) }
+            });
+            console.log((i === (items.length - 1)));
+            // retrieves articles from db only after all entries have been made
+            if (i === (items.length - 1)) {
+                res.redirect('/articles');
+            }
+        }
+    });
+});
+
+        // items.forEach(item => item.save((err, data) => { 
+        //     if (err) {
+        //         console.log(err)
+        //     } else { console.log(data) }
+        // }));
+
+// gets unsaved, unhidden articles from db and displays them
+router.get('/articles', function(req, res) {
+    Articles.find({'status': 0}, (err, data) => {
+        if (err){ 
+            console.log(err);
+        } else {
+            res.render('index', {articles: data, current: true});
+        }
+    });
+});
+
 // grabs an article by it's ObjectId
 router.get('/articles/:id', function(req, res) {
     // queries the db to find the article with a matching id 
@@ -59,72 +108,6 @@ router.post('/articles/:id', function(req, res) {
     });
 });
 
-// scrapes and displays news articles 
-router.get('/', function(req, res) {
-    request(newsURL, function(error, response, html) {
-    	// loads html into cheerio and saves it to $
-        var $ = cheerio.load(html);
-        // holds items objects
-        var items = [];
-
-        $('h3.item-title').each(function(i, element) {
-            var results = {};
-            results.title = $(this).text();
-            results.link = $(this).children('a').attr(`href`);
-            results.summary = $(this).siblings('div.item-description').text();
-            results.img = $(this).siblings('a.item-image').children('img.item-image-src').attr('src');
-            items.push(new Articles(results));
-        });
-        for (var i = 0; i < items.length; i++) {
-            items[i].save(function(err, data) {
-                if (err) {
-                    console.log(err);
-                } 
-                else {
-                    console.log(data);
-                }
-            });
-            // retrieves articles from db only after all entries have been made
-            if (i === (items.length - 1)) {
-                res.redirect('/articles');
-            }
-        }
-    });
-});
-
-// gets unsaved, unhidden articles from db and displays them
-router.get('/articles', function(req, res) {
-    Articles.find({'status': 0}, (err, data) => {
-        if (err){ 
-            console.log(err);
-        } else {
-            res.render('index', {articles: data, current: true});
-        }
-    });
-});
-
-// gets saved articles from db and displays them
-router.get('/saved', function(req, res) {
-    Articles.find({'status': 1}, (err, data) => {
-        if (err) { 
-            console.log(err);
-        } else {
-            res.render('index', {articles: data, saved: true});
-        }
-    });
-});
-
-// gets hidden articles from db and displays them
-router.get('/hidden', function(req, res) {
-    Articles.find({'status': 2}, (err, data) => {
-        if (err) { 
-            console.log(err);
-        } else {
-            res.render('index', {articles: data, hidden: true});
-        }
-    });
-});
-
 // assigns saved status to article 
 router.post('/save', function(req, res) {
     Articles.findOneAndUpdate({'_id': req.body.articleId}, {$set : {'status': 1}})
@@ -137,38 +120,13 @@ router.post('/save', function(req, res) {
     });
 });
 
-// assigns hidden status to article
-router.post('/hide', (req, res) => {
-    Articles.findOneAndUpdate({'_id': req.body.articleId}, {$set : {'status': 2}})
-    .exec(function(err, data) {
-        if (err) {
+// gets saved articles from db and displays them
+router.get('/saved', function(req, res) {
+    Articles.find({'status': 1}, (err, data) => {
+        if (err) { 
             console.log(err);
         } else {
-            res.send('Post successful');
-        }
-    });
-});
-
-// removes articles from saved status 
-router.post('/unsave', function(req, res) {
-    Articles.findOneAndUpdate({'_id': req.body.articleId}, {$set : {'status': 0}})
-    .exec((err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send('Post successful');
-        }
-    });
-});
-
-// removes articles from hidden status 
-router.post('/unhide', function(req, res) {
-    Articles.findOneAndUpdate({'_id': req.body.articleId}, {$set : {'status': 0}})
-    .exec(function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send('Post successful');
+            res.render('index', {articles: data, saved: true});
         }
     });
 });

@@ -1,0 +1,71 @@
+    <section class='top'>
+        <header class='flex-container' id='top'>
+            <nav class='topNav' role='navigation'>
+                <div class='titleBox' role='navigation'>
+                    <a class='title' href='index.html'>Geoff Dotson</a>
+                </div>
+
+                <ul role="navigation">
+                    <li role="navigation" class='mobileDrop'><a href="#">Menu</a>
+                        <ul role='navigation'>
+                            <li class="dir"><a href="/">Scrape Some News Bro</a>
+                                <ul role='navigation'>
+		    	                    <li><a href="/"> Home </a></li>
+		                            <li><a href="/saved"> Saved </a></li>
+                                </ul>
+                            </li>
+                            <li role="navigation"><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li class='drop' role="navigation"> <a href="/"> Home </a></li>
+                    <li class='drop' role="navigation"><a href="/"> Scrape New Articles </a></li>
+                    <li class='drop' role="navigation"><a href="/saved"> Saved </a></li>
+                </ul>
+            </nav>
+            <div class="navPad"></div>
+        </header>
+    </section>
+
+    <span class='topPad'><a href="" id='topScroll'></a></span>
+
+    <section class='content'>
+        <div class='content' id='content'>
+            <div class='pad'></div>
+            {{#if articles}}
+			{{#each articles}}
+            <div data_id="{{this.id}}" class='padSm'></div>
+            <div class='article'>
+				<picture>
+				    <img src="{{this.img}}">
+				</picture>
+                <div class='flex-container contentSubTitle'>
+                    <p class="article-title">{{{this.title}}}</p>
+                </div>
+                <div class="flex-container-left summary">
+                    <p class='summaries'> {{this.summary}}</p>
+                </div>
+                <div id="test">
+					<a href=https://www.investopedia.com{{this.link}} target="_blank">Read</a>
+					<a data-id="{{this.id}}" class="notes">Notes</a>
+					<a data-id="{{this.id}}" class='saves'>Save</a>
+				</div>
+			</div>
+			{{/each}}
+		    {{else}}
+			<p class="text-center"> There are no current articles to display. </p> 
+		    {{/if}}
+	    </div>
+    </section>
+
+    <section id='footer'>
+        <div class="content"></div>
+        <div class="footPad">
+        </div>
+        <footer class="footer">
+            <nav class='footNav'>
+                <a href='#topScroll' class='footLink'>Back to Top</a>
+                <a href='#' class='footLink'>&copy;</a>
+            </nav>
+        </footer>
+    </section>
+        
