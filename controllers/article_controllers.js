@@ -66,10 +66,8 @@ router.get('/', function(req, res) {
         var $ = cheerio.load(html);
         // holds items objects
         var items = [];
-        // grabs requested items from sections with classes .item.has-image
+
         $('h3.item-title').each(function(i, element) {
-        // $('.item.has-image').each(function(i, element) {
-            // empties results object
             var results = {};
             results.title = $(this).text();
             results.link = $(this).children('a').attr(`href`);
@@ -91,7 +89,6 @@ router.get('/', function(req, res) {
                 res.redirect('/articles');
             }
         }
-
     });
 });
 
