@@ -69,13 +69,13 @@ router.get('/', function(req, res) {
         // grabs requested items from sections with classes .item.has-image
         $('h3.item-title').each(function(i, element) {
         // $('.item.has-image').each(function(i, element) {
-            // empties result object
-            var result = {};
-            result.title = $(this).text();
-            result.link = $(this).children('a').attr(`href`);
-            result.summary = $(this).siblings('div.item-description').text();
-            result.img = $(this).siblings('a.item-image').children('img.item-image-src').attr('src');
-            items.push(new Articles(result));             
+            // empties results object
+            var results = {};
+            results.title = $(this).text();
+            results.link = $(this).children('a').attr(`href`);
+            results.summary = $(this).siblings('div.item-description').text();
+            results.img = $(this).siblings('a.item-image').children('img.item-image-src').attr('src');
+            items.push(new Articles(results));
         });
         for (var i = 0; i < items.length; i++) {
             items[i].save(function(err, data) {

@@ -14,7 +14,7 @@ const Articles = require('./models/articles.js');
 const Comments = require('./models/notes.js');
 
 // imports routes
-const routes = require('./controllers/article_controller.js');
+const routes = require('./controllers/article_controllers.js');
 
 // sets mongoose to leverage Promises
 mongoose.Promise = Promise;
@@ -40,7 +40,7 @@ app.use(express.static(process.cwd() + '/public'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-let mongoConfig = 'mongodb://localhost/mongoNews'
+let mongoConfig = 'mongodb://localhost/mongoNew'
 
 mongoose.connect(mongoConfig, { useNewUrlParser: true });
 // saves our mongoose connection to db
