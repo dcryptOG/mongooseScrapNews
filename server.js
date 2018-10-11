@@ -18,7 +18,7 @@ const routes = require('./controllers/article_controllers.js');
 mongoose.Promise = Promise;
 
 // sets port
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const mongoUrl = 'mongodb://localhost/mongoNew'
 
 // initializes express
@@ -33,8 +33,6 @@ app.use(express.static(process.cwd() + '/public'));
 // sets default view engine to handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-
-
 
 if (process.env.MONGODB_URI) {
 	mongoose.connect(process.env.MONGODB_URI)
