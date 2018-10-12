@@ -1,45 +1,53 @@
 {
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": "standard",
+    "plugins": [],
     "env": {
+        "es6": true,
         "browser": true,
         "commonjs": true,
         "node": true
     },
     "rules": {
+        "prop-types": [2],
+        "arrow-parens": 0,
+        "generator-star-spacing": 0,
+        "curly": 0,
+        "no-multiple-empty-lines": 0,
+        "padded-blocks": 0,
+        "key-spacing": 0,
+        "object-property-newline": 0,
+        "spaced-comment": 0,
+        "no-useless-escape": 0,
+        "brace-style": 0,
         "no-duplicate-case": "error",
         "no-empty": "error",
         "no-extra-semi": "error",
         "no-func-assign": "error",
         "no-irregular-whitespace": "error",
         "no-unreachable": "error",
-        "curly": "error",
         "dot-notation": "error",
         "eqeqeq": "error",
         "no-empty-function": "error",
-        "no-multi-spaces": "error",
         "no-mixed-spaces-and-tabs": "error",
-        "no-trailing-spaces": "error",
+        "no-trailing-spaces": "off",
         "default-case": "error",
         "no-fallthrough": "error",
         "no-unused-vars": "error",
         "no-use-before-define": "error",
         "no-redeclare": "error",
         "camelcase": "error",
-        "brace-style": "error",
         "indent": [
             "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
+            1
         ],
         "quotes": ["error", "single", {
             "avoidEscape": true,
             "allowTemplateLiterals": true
         }],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "semi": 1
     }
 }
