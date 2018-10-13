@@ -1,0 +1,35 @@
+<span class='topPad'><a href="" id='topScroll'></a></span>
+
+<section class='content'>
+    <div class='content' id='content'>
+        <div class='pad'></div>
+        {{#if articles}}
+            {{#each articles}}
+                <div class='padSm'></div>
+                <div class='articles'>
+                    <picture>
+                        <img src="{{this.img}}">
+                    </picture>
+                    <div class='flex-container contentSubTitle'>
+                        <p class="article-title">{{{this.title}}}</p>
+                    </div>
+                    <div class="flex-container-left summary">
+                        <p class='summaries'> {{this.summary}}</p>
+                    </div>
+                    <div id="test">
+                        <a data-id="{{this.id}}" id="{{this.id}}" class="show" href='#'>Notes</a>
+                        <a data-id="{{this.id}}" id="{{this.id}}" class='saves'>Save</a>
+                        <a href=https://www.investopedia.com {{this.link}} target="_blank">Read</a>
+                    </div>
+                    <form data-id="{{this.id}}" id="{{this.id}}" class='form'>
+                        <input class='titles' placeholder="title" type="text" minlength="1" required="required" />
+                        <input class='notes' placeholder="notes..." type="text" required="required" />
+                        <button type='button' id="{{this.id}}" class='notes'>Save</button>
+                    </form>
+                </div>
+            {{/each}}
+        {{else}}
+            <p class="text-center"> There are no current articles to display. </p>
+        {{/if}}
+    </div>
+</section>
